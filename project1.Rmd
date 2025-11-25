@@ -1,0 +1,119 @@
+---
+title: "Test 1 Introduction to E-Business Analytics"
+subtitle: "Performance Metrics Report"
+author: Shauna Hepburn-667680763
+date: September 19, 2025
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Executive Summary
+
+Using 153 days of data, this project analyzes the correlation between user engagement and website performance. The strong moderate correlation coefficient of 0.698360 indicates that higher engagement is consistently linked with website performance. These patterns suggest that e-business managers should focus on improving user engagement through improvements  in content, usability, and personalization to promote website performance.
+
+## Question 1
+```{R}
+webperfo <- data.frame(
+  engagement = airquality$Temp,
+  performance = airquality$Ozone,
+  server_load = airquality$Wind
+)
+```
+
+### Q.1a
+```{R}
+head(webperfo)
+```
+
+There are 3 data columns, named engagement, performance, and server load. Seeing just the first 6 rows is useful as it gives a clear snapshot of the data and while allowing an individual to see errors early on.
+
+### Q.1b
+```{R}
+summary(webperfo)
+```
+
+Row 5 has an NA in the performance column. The summary shows a range for engagement from a minimum of 56 to a maximum of 74.
+
+### Q.1c
+```{R}
+nrow(webperfo)
+```
+
+This number is important as it gives the manager 153 days worth of data for future planning and decision making.
+
+### Q.1d
+```{R}
+max(webperfo)
+```
+
+The highest highest engagement is 97 compared to the median of 79.
+
+### Q.1e
+```{R}
+max(webperfo$performance, na.rm = TRUE)
+```
+
+The maximum value for performance is 168. Due to missing values you have to use na.rm = TRUE.
+
+## Question 2
+### Q.2a
+```{R}
+plot(webperfo$engagement, webperfo$performance)
+```
+
+The plot shows that as engagement increases performance increases as well,demonstrating an upward trend.
+This can be difficult to understand in a business presentation as the x-axis and y-axis have unclear names, as they are still in R code.
+
+### Q.2b
+```{R}
+plot(x = webperfo$engagement, y = webperfo$performance,
+     main = "User Engagement vs Website Performance",
+     xlab = "Daily User Engagement Score", 
+     ylab = "Website Performance Score")
+```
+
+This adjustment is useful for a business presentation, by having a clear title and naming the y-axis and x-axis, allowing the audience to know know what is being compared.
+
+### Q.2c
+```{R}
+plot(x = webperfo$engagement, y = webperfo$performance,
+     main = "User Engagement vs Website Performance",
+     xlab = "Daily User Engagement Score", 
+     ylab = "Website Performance Score",
+pch = 18, col = "#f765a5")
+```
+
+By adding the code pch = 18, col = "#f765a5" the points on the graph a more clear demonstrating a clear upward trend.
+
+### Q.2d
+```{R}
+plot(x = webperfo$engagement, y = webperfo$performance,
+     main = "User Engagement vs Website Performance",
+     xlab = "Daily User Engagement Score", 
+     ylab = "Website Performance Score",
+pch = 18, col = "#f765a5")
+abline(lm(performance ~ engagement, data = webperfo), 
+       col = "#4eed98", lwd = 2)
+```
+
+The green trend line is going up with the increasing engagement. This demonstrates a positive linear relationship between Daily User Engagement Score and Website Performance Score.
+
+## Question 3
+### Q.3a
+```{R}
+cor(webperfo$engagement, webperfo$performance, use = "complete.obs")
+```
+
+The correlation coefficient is 0.6983603, meaning it is on the high-end of moderate. Having a moderate correlation coefficient means there is a consistent and meaningful positive relationship.
+
+###Q.3b
+
+When engagement is high, website performance typically improves. The data demonstrates a positive relationship between the two. An e-business manager should prioritize strategies that help increase user engagement, such as improving content relevance, site usability, and personalization. Focusing on these improvements will likely promote increased website performance.
+
+
+
+
+
+
